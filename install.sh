@@ -30,6 +30,15 @@ for _Version in `ls com/dianping/cat/cat-client/`; do
 done
 
 
+for _Version in `ls com/ctrip/framework/xpipe/core`; do
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.jar,com/ctrip/framework/xpipe/core/$_Version/core-$_Version-tests.jar -DpomFile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.pom -Dpackaging=pom
+done
+
+for _Version in `ls com/ctrip/framework/xpipe/xpipe-parent`; do
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/xpipe-parent/$_Version/xpipe-parent-$_Version.pom -DpomFile=com/ctrip/framework/xpipe/xpipe-parent/$_Version/xpipe-parent-$_Version.pom -Dpackaging=pom
+done
+
+
 for _Version in `ls com/dianping/cat/parent/`; do
 	mvn install:install-file -Dfile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -DpomFile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -Dpackaging=pom
 done
