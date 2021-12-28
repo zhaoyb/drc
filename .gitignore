@@ -51,7 +51,6 @@ console/src/main/resources/drc.properties
 applier
 cluster-manager
 console
-core
 db
 docs
 fetcher
