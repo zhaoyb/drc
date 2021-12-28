@@ -35,12 +35,10 @@
         <hystrix.version>1.5.12-ctrip.2</hystrix.version>
         <cmongo-client-sync.version>0.2.5</cmongo-client-sync.version>
         <ucs.version>0.4.0</ucs.version>
-        <!-- arch bom -->
-        <arch-bom.version>2.1.202</arch-bom.version>
 
         <!-- third party -->
-        <foundation-service.version>3.0.8</foundation-service.version>
-        <plexus-container-default.version>3.0.8</plexus-container-default.version>
+        <foundation-service.version>3.1.2</foundation-service.version>
+        <plexus-container-default.version>3.1.2</plexus-container-default.version>
         <cs2j.version>1.0.0</cs2j.version>
         <!-- in line with the version used by tars -->
         <tomcat.version>7.0.73</tomcat.version>
@@ -372,16 +370,6 @@
                 <version>${ucs.version}</version>
             </dependency>
 
-
-
-            <!-- Arch -->
-            <dependency>
-                <groupId>com.ctrip.arch</groupId>
-                <artifactId>arch-bom</artifactId>
-                <version>${arch-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!-- httpasyncclient -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
