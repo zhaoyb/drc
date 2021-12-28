@@ -48,4 +48,16 @@ console/src/main/webapp/drc-admin
 console/src/main/resources/drc.properties
 
 #module
+applier
+cluster-manager
+console
+core
+db
+docs
+fetcher
+integration-test
+package
+performance-test
+replicator
+services
 
