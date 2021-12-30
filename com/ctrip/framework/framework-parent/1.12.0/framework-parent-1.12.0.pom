@@ -36,6 +36,11 @@
         <snappy-java.version>1.1.2.6</snappy-java.version>
         <testng.version>6.10</testng.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
+
+        <!-- add from super pom -->
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-enforcer-plugin_version>1.3.1</maven-enforcer-plugin_version>
+        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -192,4 +197,30 @@
 
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/AllTests.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
