@@ -31,7 +31,7 @@ done
 
 
 for _Version in `ls com/ctrip/framework/xpipe/core`; do
-	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.jar,com/ctrip/framework/xpipe/core/$_Version/core-$_Version-tests.jar -DpomFile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.pom -Dpackaging=pom
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.jar -DpomFile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.pom -Dpackaging=pom
 done
 
 for _Version in `ls com/ctrip/framework/xpipe/xpipe-parent`; do
