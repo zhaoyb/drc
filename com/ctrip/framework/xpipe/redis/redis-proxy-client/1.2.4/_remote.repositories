@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Jul 21 11:45:56 CST 2021
+redis-proxy-client-1.2.4.pom>nexus=
+redis-proxy-client-1.2.4-sources.jar>=
+redis-proxy-client-1.2.4.jar>=
+redis-proxy-client-1.2.4.pom>=
+redis-proxy-client-1.2.4-tests.jar>=
+redis-proxy-client-1.2.4.jar>nexus=

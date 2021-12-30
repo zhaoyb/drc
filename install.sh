@@ -30,6 +30,15 @@ for _Version in `ls com/dianping/cat/cat-client/`; do
 done
 
 
+for _Version in `ls com/ctrip/framework/xpipe/redis/redis-parent`; do
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/redis/redis-parent/$_Version/redis-parent-$_Version.pom -DpomFile=com/ctrip/framework/xpipe/redis/redis-parent/$_Version/redis-parent-$_Version.pom -Dpackaging=pom
+done
+
+for _Version in `ls com/ctrip/framework/xpipe/redis/redis-proxy-client`; do
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/redis/redis-proxy-client/$_Version/redis-proxy-client-$_Version.jar -DpomFile=com/ctrip/framework/xpipe/redis/redis-proxy-client/$_Version/redis-proxy-client-$_Version.pom
+	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/redis/redis-proxy-client/$_Version/redis-proxy-client-$_Version.jar -DpomFile=com/ctrip/framework/xpipe/redis/redis-proxy-client/$_Version/redis-proxy-client-$_Version.pom  -Dclassifier=tests
+done
+
 for _Version in `ls com/ctrip/framework/xpipe/core`; do
 	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.jar -DpomFile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.pom
 	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.jar -DpomFile=com/ctrip/framework/xpipe/core/$_Version/core-$_Version.pom -Dclassifier=tests
