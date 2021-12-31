@@ -41,6 +41,10 @@ for _Version in `ls com/ctrip/platform/dal-client`; do
 	mvn install:install-file -Dfile=com/ctrip/platform/dal-client/$_Version/dal-client-$_Version.jar -DpomFile=com/ctrip/platform/dal-client/$_Version/dal-client-$_Version.pom
 done
 
+for _Version in `ls com/microsoft/sqlserver/mssql-jdbc`; do
+	mvn install:install-file -Dfile=com/microsoft/sqlserver/mssql-jdbc/$_Version/mssql-jdbc-$_Version.jre7.ctrip.jar -DpomFile=com/microsoft/sqlserver/mssql-jdbc/$_Version/mssql-jdbc-$_Version.jre7.ctrip.pom
+done
+
 
 for _Version in `ls com/ctrip/framework/xpipe/redis/redis-parent`; do
 	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/redis/redis-parent/$_Version/redis-parent-$_Version.pom -DpomFile=com/ctrip/framework/xpipe/redis/redis-parent/$_Version/redis-parent-$_Version.pom -Dpackaging=pom
