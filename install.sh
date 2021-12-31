@@ -25,8 +25,20 @@ for _Version in `ls com/ctrip/framework/framework-parent/ `; do
 	mvn install:install-file -Dfile=com/ctrip/framework/framework-parent/$_Version/framework-parent-$_Version.pom -DpomFile=com/ctrip/framework/framework-parent/$_Version/framework-parent-$_Version.pom -Dpackaging=pom
 done
 
+for _Version in `ls com/dianping/cat/parent/`; do
+	mvn install:install-file -Dfile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -DpomFile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -Dpackaging=pom
+done
+
 for _Version in `ls com/dianping/cat/cat-client/`; do
 	mvn install:install-file -Dfile=com/dianping/cat/cat-client/$_Version/cat-client-$_Version.jar -DpomFile=com/dianping/cat/cat-client/$_Version/cat-client-$_Version.pom
+done
+
+for _Version in `ls com/ctrip/platform/dal-client-parent`; do
+	mvn install:install-file -Dfile=com/ctrip/platform/dal-client-parent/$_Version/dal-client-parent-$_Version.pom -DpomFile=com/ctrip/platform/dal-client-parent/$_Version/dal-client-parent-$_Version.pom -Dpackaging=pom
+done
+
+for _Version in `ls com/ctrip/platform/dal-client`; do
+	mvn install:install-file -Dfile=com/ctrip/platform/dal-client/$_Version/dal-client-$_Version.jar -DpomFile=com/ctrip/platform/dal-client/$_Version/dal-client-$_Version.pom
 done
 
 
@@ -47,12 +59,6 @@ done
 for _Version in `ls com/ctrip/framework/xpipe/xpipe-parent`; do
 	mvn install:install-file -Dfile=com/ctrip/framework/xpipe/xpipe-parent/$_Version/xpipe-parent-$_Version.pom -DpomFile=com/ctrip/framework/xpipe/xpipe-parent/$_Version/xpipe-parent-$_Version.pom -Dpackaging=pom
 done
-
-
-for _Version in `ls com/dianping/cat/parent/`; do
-	mvn install:install-file -Dfile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -DpomFile=com/dianping/cat/parent/$_Version/parent-$_Version.pom -Dpackaging=pom
-done
-
 
 
 for _Version in `ls org/codehaus/plexus/plexus-container-default/`; do
