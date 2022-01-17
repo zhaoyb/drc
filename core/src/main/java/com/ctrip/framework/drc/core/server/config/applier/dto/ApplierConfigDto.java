@@ -23,6 +23,7 @@ public class ApplierConfigDto extends ApplierMeta {
     private String routeInfo;
     private String skipEvent;
     private int applyMode;
+    private String replicationStrategy;
 
     public String getManagerIp() {
         return managerIp;
@@ -112,6 +113,14 @@ public class ApplierConfigDto extends ApplierMeta {
         this.applyMode = applyMode;
     }
 
+    public String getReplicationStrategy() {
+        return replicationStrategy;
+    }
+
+    public void setReplicationStrategy(String replicationStrategy) {
+        this.replicationStrategy = replicationStrategy;
+    }
+
     @JsonIgnore
     public String getRegistryKey() {
         return ApplierRegistryKey.from(target.mhaName, super.getCluster(), replicator.mhaName);
@@ -157,7 +166,8 @@ public class ApplierConfigDto extends ApplierMeta {
                 Objects.equals(nameFilter, that.nameFilter) &&
                 Objects.equals(routeInfo, that.routeInfo) &&
                 target.port == that.target.port &&
-                applyMode == that.applyMode;
+                applyMode == that.applyMode &&
+                replicationStrategy == that.replicationStrategy;
     }
 
     @Override

@@ -7,11 +7,11 @@ import com.ctrip.framework.drc.core.meta.InstanceInfo;
 import com.ctrip.framework.drc.core.server.config.applier.dto.ApplierConfigDto;
 import com.ctrip.framework.drc.core.server.utils.ThreadUtils;
 import com.ctrip.framework.drc.manager.ha.meta.CurrentMetaManager;
+import com.ctrip.framework.drc.manager.ha.meta.DcCache;
 import com.ctrip.framework.drc.manager.ha.meta.impl.DefaultCurrentMetaManager;
 import com.ctrip.framework.drc.manager.healthcheck.service.task.ExecutedGtidQueryTask;
 import com.ctrip.framework.drc.manager.utils.SpringUtils;
 import com.ctrip.xpipe.api.endpoint.Endpoint;
-import com.ctrip.xpipe.foundation.DefaultFoundationService;
 import com.ctrip.xpipe.proxy.ProxyEndpoint;
 import com.ctrip.xpipe.utils.VisibleForTesting;
 import com.google.common.collect.Lists;
@@ -33,21 +33,26 @@ public class ApplierNotifier extends AbstractNotifier implements Notifier {
 
     private CurrentMetaManager currentMetaManager;
 
+    private String currentDc;
+
     private ListeningExecutorService gtidQueryExecutorService = MoreExecutors.listeningDecorator(ThreadUtils.newCachedThreadPool("ApplierNotifier-ExecutedGtidQuery"));
 
     private ApplierNotifier() {
         super();
-        initMetaManager();
+        initSpringBean();
     }
 
-    private void initMetaManager() {
+    private void initSpringBean() {
         try {
             ApplicationContext applicationContext = SpringUtils.getApplicationContext();
             if (applicationContext != null) {
                 currentMetaManager = applicationContext.getBean(DefaultCurrentMetaManager.class);
+                DcCache dcCache = applicationContext.getBean(DcCache.class);
+                currentDc = dcCache.getDcMeta().getDc().getId();
+                logger.info("init currentDc to {}", currentDc);
             }
         } catch (Exception e) {
-            logger.error("initMetaManager error", e);
+            logger.error("initSpringBean error", e);
         }
     }
 
@@ -133,7 +138,6 @@ public class ApplierNotifier extends AbstractNotifier implements Notifier {
         config.target.password = dbs.getWritePassword();
         config.target.cluster = dbCluster.getName();
         config.target.mhaName = dbCluster.getMhaName();
-        config.target.idc = System.getProperty(DefaultFoundationService.DATA_CENTER_KEY, "unknown");
 
         //incorrect naming, should use 'sourceIdc'.
         String targetIdc = null;
@@ -156,6 +160,7 @@ public class ApplierNotifier extends AbstractNotifier implements Notifier {
             throw new RuntimeException("source idc not found");
         } else {
             NOTIFY_LOGGER.info("notify - source idc: " + targetIdc);
+            config.target.idc = targetIdc;
         }
         config.replicator = new InstanceInfo();
 
@@ -176,11 +181,11 @@ public class ApplierNotifier extends AbstractNotifier implements Notifier {
             config.replicator.port = replicator.getApplierPort();
             config.replicator.name = "unknown";
             config.replicator.cluster = dbCluster.getName();
-            config.replicator.idc = "unknown";
+            config.replicator.idc = targetIdc;
         }
         config.replicator.mhaName = replicatorMhaName;
 
-        config.idc = "unknown";  //TODO get right idc
+        config.idc = currentDc;
         config.cluster = dbCluster.getName();
         config.name = config.cluster + "-applier";
 

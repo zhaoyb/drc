@@ -8,6 +8,7 @@ import com.ctrip.framework.drc.applier.activity.monitor.ReportConflictActivity;
 import com.ctrip.framework.drc.applier.resource.TransactionTableResource;
 import com.ctrip.framework.drc.applier.resource.condition.LWMResource;
 import com.ctrip.framework.drc.applier.resource.condition.ProgressResource;
+import com.ctrip.framework.drc.applier.resource.context.conflict.AdaptiveReplicationStrategyResource;
 import com.ctrip.framework.drc.applier.resource.mysql.DataSourceResource;
 import com.ctrip.framework.drc.applier.server.ApplierServerInCluster;
 import com.ctrip.framework.drc.core.server.config.applier.dto.ApplierConfigDto;
@@ -40,6 +41,7 @@ public class ApplierTestServerInCluster extends ApplierServerInCluster {
                 .with(CapacityResource.class)
                 .with(ListenableDirectMemoryResource.class)
                 .with(TransactionTableResource.class)
+                .with(AdaptiveReplicationStrategyResource.class)
                 .with(MetricsActivity.class)
                 .with(ReportConflictActivity.class)
                 .with(LoadEventActivity.class)

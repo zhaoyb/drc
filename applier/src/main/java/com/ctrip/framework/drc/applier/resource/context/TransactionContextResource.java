@@ -12,6 +12,7 @@ import com.ctrip.framework.drc.core.driver.schema.data.Bitmap;
 import com.ctrip.framework.drc.core.driver.schema.data.Columns;
 import com.ctrip.framework.drc.core.driver.schema.data.TableKey;
 import com.ctrip.framework.drc.core.monitor.reporter.DefaultEventMonitorHolder;
+import com.ctrip.framework.drc.core.server.conflict.ReplicationStrategy;
 import com.ctrip.framework.drc.fetcher.event.transaction.TransactionData;
 import com.ctrip.framework.drc.fetcher.resource.context.AbstractContext;
 import com.ctrip.framework.drc.fetcher.system.Derived;
@@ -67,6 +68,9 @@ public class TransactionContextResource extends AbstractContext
 
     @InstanceResource
     public TransactionTable transactionTable;
+
+    @InstanceResource
+    public ReplicationStrategy replicationStrategy;
 
     @Derived
     public DataSource dataSource;
@@ -576,8 +580,11 @@ public class TransactionContextResource extends AbstractContext
                         continue STATEMENT;
                     }
                 }
-                Bitmap bitmapOfValueOnUpdate = this.columns.getLastBitmapOnUpdate();
-                List<Object> valueOnUpdate = this.beforeBitmap.onBitmap(bitmapOfValueOnUpdate).on(this.beforeRows.get(i));
+                Bitmap bitmapOfValueOnUpdate = replicationStrategy.onUpdateWhereCondition(this.columns) ;
+                List<Object> valueOnUpdate = null;
+                if (bitmapOfValueOnUpdate != null) {
+                    valueOnUpdate = this.beforeBitmap.onBitmap(bitmapOfValueOnUpdate).on(this.beforeRows.get(i));
+                }
                 for (int j = this.columns.getBitmapsOfIdentifier().size() - 1; j >= 0; j--) {
                     Bitmap bitmapOfIdentifier = this.columns.getBitmapsOfIdentifier().get(j);
                     List<Object> identifier = this.beforeBitmap.onBitmap(bitmapOfIdentifier).on(this.beforeRows.get(i));
@@ -621,10 +628,7 @@ public class TransactionContextResource extends AbstractContext
         try {
             STATEMENT:
             for (int i = 0; i < this.beforeRows.size(); i++) {
-                Bitmap bitmapOfConditions = Bitmap.union(
-                        this.columns.getBitmapsOfIdentifier().get(0),
-                        this.columns.getLastBitmapOnUpdate()
-                );
+                Bitmap bitmapOfConditions = replicationStrategy.unionWhereCondition(this.columns);
                 List<Object> conditions = this.beforeBitmap
                         .onBitmap(bitmapOfConditions)
                         .on(this.beforeRows.get(i));
@@ -639,10 +643,7 @@ public class TransactionContextResource extends AbstractContext
                 conflictMark(true);
                 while (result.type == UNKNOWN_COLUMN) {
                     String removedColumnName = shrink();
-                    bitmapOfConditions = Bitmap.union(
-                            this.columns.getBitmapsOfIdentifier().get(0),
-                            this.columns.getLastBitmapOnUpdate()
-                    );
+                    bitmapOfConditions = replicationStrategy.unionWhereCondition(this.columns);
                     conditions = this.beforeBitmap
                             .onBitmap(bitmapOfConditions)
                             .on(this.beforeRows.get(i));
@@ -668,8 +669,12 @@ public class TransactionContextResource extends AbstractContext
                     }
                 }
 
-                Bitmap bitmap2 = this.columns.getLastBitmapOnUpdate();
-                List<Object> valueOnUpdate = this.afterBitmap.onBitmap(bitmap2).on(this.afterRows.get(i));
+                Bitmap bitmap2 = replicationStrategy.onUpdateWhereCondition(this.columns) ;
+                List<Object> valueOnUpdate = null;
+                if (bitmap2 != null) {
+                    valueOnUpdate = this.afterBitmap.onBitmap(bitmap2).on(this.afterRows.get(i));
+                }
+
                 for (int j = this.columns.getBitmapsOfIdentifier().size() - 1; j >= 0; j--) {
                     Bitmap bitmap1 = this.columns.getBitmapsOfIdentifier().get(j);
                     List<Object> identifier = this.beforeBitmap.onBitmap(bitmap1).on(this.beforeRows.get(i));
@@ -719,10 +724,7 @@ public class TransactionContextResource extends AbstractContext
         try {
             STATEMENT:
             for (int i = 0; i < beforeRows.size(); i++) {
-                Bitmap bitmapOfConditions = Bitmap.union(
-                        columns.getBitmapsOfIdentifier().get(0),
-                        columns.getLastBitmapOnUpdate()
-                );
+                Bitmap bitmapOfConditions = replicationStrategy.unionWhereCondition(this.columns);
                 List<Object> conditions = beforeBitmap
                         .onBitmap(bitmapOfConditions)
                         .on(beforeRows.get(i));

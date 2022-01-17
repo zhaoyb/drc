@@ -9,7 +9,7 @@
         <clusterManager ip="1.1.1.2" port="9748" master="false"/>
         <zkServer address="127.0.0.1:2181"/>
         <dbClusters>
-            <dbCluster id="drcTest-1.abc" name="drcTest-1" mhaName="abc" buName="abc" org-id="1" appId="1">
+            <dbCluster id="drcTest-1.abc" name="drcTest-1" mhaName="abc" buName="abc" org-id="1" appId="1" cflStgy="time">
                 <dbs readUser="abc" readPassword="abc" writeUser="abc" writePassword="abc"  monitorUser="abc" monitorPassword="abc" previousMaster="" >
                     <db ip="1.1.1.1" port="9747" master="true" uuid="abc" />
                     <db ip="1.1.1.2" port="9747" master="false" uuid="123" />
