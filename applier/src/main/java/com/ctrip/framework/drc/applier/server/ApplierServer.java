@@ -13,6 +13,7 @@ import com.ctrip.framework.drc.fetcher.resource.condition.CapacityResource;
 import com.ctrip.framework.drc.fetcher.resource.condition.ListenableDirectMemoryResource;
 import com.ctrip.framework.drc.fetcher.resource.context.LinkContextResource;
 import com.ctrip.framework.drc.fetcher.resource.thread.ExecutorResource;
+import com.ctrip.framework.drc.fetcher.resource.transformer.TransformerContextResource;
 import com.ctrip.framework.drc.fetcher.system.AbstractLink;
 
 /**
@@ -31,6 +32,7 @@ public class ApplierServer extends AbstractLink {
                     .with(CapacityResource.class)
                     .with(ListenableDirectMemoryResource.class)
                     .with(AdaptiveReplicationStrategyResource.class)
+                    .with(TransformerContextResource.class)
                     .with(MetricsActivity.class)
                     .with(ReportConflictActivity.class)
                     .with(LoadEventActivity.class)
