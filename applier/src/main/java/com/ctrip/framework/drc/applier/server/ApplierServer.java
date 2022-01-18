@@ -5,7 +5,7 @@ import com.ctrip.framework.drc.applier.activity.monitor.MetricsActivity;
 import com.ctrip.framework.drc.applier.activity.monitor.ReportConflictActivity;
 import com.ctrip.framework.drc.applier.resource.condition.LWMResource;
 import com.ctrip.framework.drc.applier.resource.condition.ProgressResource;
-import com.ctrip.framework.drc.applier.resource.context.conflict.AdaptiveReplicationStrategyResource;
+import com.ctrip.framework.drc.applier.resource.context.conflict.ReplicationStrategyResource;
 import com.ctrip.framework.drc.applier.resource.mysql.DataSourceResource;
 import com.ctrip.framework.drc.fetcher.activity.event.InvolveActivity;
 import com.ctrip.framework.drc.fetcher.activity.event.LoadEventActivity;
@@ -31,7 +31,7 @@ public class ApplierServer extends AbstractLink {
                     .with(ProgressResource.class)
                     .with(CapacityResource.class)
                     .with(ListenableDirectMemoryResource.class)
-                    .with(AdaptiveReplicationStrategyResource.class)
+                    .with(ReplicationStrategyResource.class)
                     .with(TransformerContextResource.class)
                     .with(MetricsActivity.class)
                     .with(ReportConflictActivity.class)

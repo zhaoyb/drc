@@ -11,7 +11,7 @@ import com.ctrip.framework.drc.fetcher.system.InstanceConfig;
  * @Author limingdong
  * @create 2022/1/14
  */
-public class AdaptiveReplicationStrategyResource extends AbstractResource implements ReplicationStrategy {
+public class ReplicationStrategyResource extends AbstractResource implements ReplicationStrategy {
 
     private ReplicationStrategy delegate;
 

@@ -12,10 +12,10 @@ public class AdaptiveReplicationStrategyResourceTest extends ReplicationStrategy
 
     @Test
     public void timeBased() throws Exception {
-        replicationStrategy = new AdaptiveReplicationStrategyResource();
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "time";
-        ((AdaptiveReplicationStrategyResource) replicationStrategy).initialize();
+        replicationStrategy = new ReplicationStrategyResource();
+        ((ReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
+        ((ReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "time";
+        ((ReplicationStrategyResource) replicationStrategy).initialize();
 
         Bitmap where = replicationStrategy.unionWhereCondition(columns());
         Bitmap excepted = Bitmap.from(true, false, false, true);
@@ -28,10 +28,10 @@ public class AdaptiveReplicationStrategyResourceTest extends ReplicationStrategy
 
     @Test
     public void regionBased() throws Exception {
-        replicationStrategy = new AdaptiveReplicationStrategyResource();
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "Oversea";
-        ((AdaptiveReplicationStrategyResource) replicationStrategy).initialize();
+        replicationStrategy = new ReplicationStrategyResource();
+        ((ReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
+        ((ReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "Oversea";
+        ((ReplicationStrategyResource) replicationStrategy).initialize();
 
         Bitmap where = replicationStrategy.unionWhereCondition(columns());  // with on update
         Bitmap excepted = Bitmap.from(true, false, false, true);
@@ -44,10 +44,10 @@ public class AdaptiveReplicationStrategyResourceTest extends ReplicationStrategy
 
     @Test
     public void idcBased() throws Exception {
-        replicationStrategy = new AdaptiveReplicationStrategyResource();
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
-        ((AdaptiveReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "shaoy";
-        ((AdaptiveReplicationStrategyResource) replicationStrategy).initialize();
+        replicationStrategy = new ReplicationStrategyResource();
+        ((ReplicationStrategyResource)replicationStrategy).srcIdc = "shaoy";
+        ((ReplicationStrategyResource)replicationStrategy).replicationStrategyConfig = "shaoy";
+        ((ReplicationStrategyResource) replicationStrategy).initialize();
 
         Bitmap where = replicationStrategy.unionWhereCondition(columns());  // with on update
         Bitmap excepted = Bitmap.from(true);
