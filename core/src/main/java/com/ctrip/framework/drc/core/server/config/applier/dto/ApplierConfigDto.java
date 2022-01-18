@@ -155,6 +155,7 @@ public class ApplierConfigDto extends ApplierMeta {
                 ", idc='" + idc + '\'' +
                 ", cluster='" + cluster + '\'' +
                 ", applyMode='" + applyMode + '\'' +
+                ", replicationStrategy='" + replicationStrategy + '\'' +
                 '}';
     }
 
@@ -181,6 +182,6 @@ public class ApplierConfigDto extends ApplierMeta {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), gaqSize, workerCount, workerSize, replicator.ip, replicator.port, target.ip, includedDbs, nameFilter, routeInfo, target.port, applyMode);
+        return Objects.hash(super.hashCode(), gaqSize, workerCount, workerSize, replicator.ip, replicator.port, target.ip, includedDbs, nameFilter, routeInfo, target.port, applyMode, replicationStrategy);
     }
 }

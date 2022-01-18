@@ -151,6 +151,7 @@ public class ApplierNotifier extends AbstractNotifier implements Notifier {
                 config.setApplyMode(applier.getApplyMode());
                 config.setNameFilter(applier.getNameFilter());
                 config.setNameMapping(applier.getNameMapping());
+                config.setReplicationStrategy(applier.getReplicationStrategy());
                 Route route = getRoute(dbCluster.getId(), applier.getTargetIdc());
                 config.setRouteInfo(route == null ? "" : (route.routeProtocol() + " " + ProxyEndpoint.PROXY_SCHEME.TCP.name()));
                 targetIdc = applier.getTargetIdc();
