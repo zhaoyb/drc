@@ -9,6 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>applier</artifactId>
+    <properties>
+        <commons-collections4>4.2</commons-collections4>
+    </properties>
 
     <properties>
         <commons-collections4>4.2</commons-collections4>
