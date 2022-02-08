@@ -49,6 +49,13 @@ public class ReplicatorContainerController {
      * @param replicatorConfigDto
      * @return
      */
+
+    /**
+     * 启动
+     *
+     * @param replicatorConfigDto
+     * @return
+     */
     @RequestMapping(method = RequestMethod.PUT)
     public ApiResult<Boolean> start(@RequestBody ReplicatorConfigDto replicatorConfigDto) {
         try {
@@ -84,6 +91,12 @@ public class ReplicatorContainerController {
         }
     }
 
+    /**
+     * 重启
+     *
+     * @param replicatorConfigDto
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ApiResult<Boolean> restart(@RequestBody ReplicatorConfigDto replicatorConfigDto) {
 
@@ -105,6 +118,12 @@ public class ReplicatorContainerController {
         }
     }
 
+    /**
+     * 注册
+     *
+     * @param replicatorConfigDto
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.PUT)
     public ApiResult<Boolean> register(@RequestBody ReplicatorConfigDto replicatorConfigDto) {
 
@@ -119,6 +138,11 @@ public class ReplicatorContainerController {
         }
     }
 
+    /**
+     * 注销
+     *
+     * @param registryKey
+     */
     @RequestMapping(value = "/{registryKey}/", method = RequestMethod.DELETE)
     public void destroy(@PathVariable String registryKey) {
         logger.info("[Remove] replicator registryKey {}", registryKey);

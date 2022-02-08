@@ -22,9 +22,16 @@ public class ReplicatorContainerApplication {
 
     private static Logger logger = LoggerFactory.getLogger(ReplicatorContainerApplication.class);
 
+    /**
+     * Replicator 启动
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         SpringApplication application = new SpringApplication(ReplicatorContainerApplication.class);
+        // 关闭容器自身的 优雅关闭
         application.setRegisterShutdownHook(false);
         final ConfigurableApplicationContext context = application.run(args);
 

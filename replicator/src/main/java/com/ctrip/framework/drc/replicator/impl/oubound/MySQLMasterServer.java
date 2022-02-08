@@ -66,6 +66,7 @@ public class MySQLMasterServer extends AbstractMySQLServer implements MySQLServe
     }
 
     protected void doStart() throws Exception {
+        // netty 服务
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
